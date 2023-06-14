@@ -6,8 +6,7 @@ import Image from "next/image";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-  // const { data: session } = useSession();
-  const isUserLoggedIn = true;
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -34,10 +33,11 @@ const Nav = () => {
         <p className="logo_text  ">AI-Prompt</p>
       </Link>
 
+      
+      
       {/* Desktop Nav Start*/}
       <div className="sm:flex hidden">
-        {/* {session?.user ? ( */}
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -47,8 +47,7 @@ const Nav = () => {
             </button>
             <Link href="/profile">
               <Image
-                // src={session?.user.image}
-                src="/assets/images/logo.svg"
+                src={session?.user.image}
                 alt="profile"
                 width={37}
                 height={37}
@@ -76,12 +75,10 @@ const Nav = () => {
 
       {/* Mobile Nav Start */}
       <div className="sm:hidden flex relative">
-        {/* {session?.user ? ( */}
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              // src={session?.user.image}
-              src="/assets/images/logo.svg"
+              src={session?.user.image}
               alt="profile"
               width={37}
               height={37}
@@ -106,7 +103,7 @@ const Nav = () => {
                 >
                   Create Prompt
                 </Link>
-                
+
                 <button
                   type="button"
                   onClick={() => {
